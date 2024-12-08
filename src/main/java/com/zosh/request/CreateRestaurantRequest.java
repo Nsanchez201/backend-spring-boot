@@ -23,4 +23,5 @@ public class CreateRestaurantRequest {
 	private String openingHours;
 	private List<String> images;
     private LocalDateTime registrationDate;
+	private Boolean isOpen;
 }

@@ -51,7 +51,8 @@ public class Restaurant {
     private List<String> images;
    
     private LocalDateTime registrationDate;
-    
+
+    @Column(name = "[open]")
     private boolean open;
 
     @JsonIgnore
