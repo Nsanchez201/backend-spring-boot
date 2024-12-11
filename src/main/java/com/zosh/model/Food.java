@@ -27,7 +27,6 @@ public class Food {
     @ManyToOne
     private Category foodCategory;
 
-
     @ElementCollection
     @Column(length = 1000)
     private List<String> images;
@@ -46,7 +45,5 @@ public class Food {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-
-
     
 }

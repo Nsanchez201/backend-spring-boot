@@ -24,22 +24,17 @@ public class RestaurantController {
 	@Autowired
 	private UserService userService;
 
-
 	@GetMapping("/search")
 	public ResponseEntity<List<Restaurant>> findRestaurantByName(
 			@RequestParam String keyword) {
 		List<Restaurant> restaurant = restaurantService.searchRestaurant(keyword);
-
 		return ResponseEntity.ok(restaurant);
 	}
 
 
 	@GetMapping()
 	public ResponseEntity<List<Restaurant>> getAllRestaurants() {
-
 		List<Restaurant> restaurants = restaurantService.getAllRestaurant();
-		
-		
 		return ResponseEntity.ok(restaurants);
 	}
 	
@@ -47,7 +42,6 @@ public class RestaurantController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Restaurant> findRestaurantById(
 			@PathVariable Long id) throws RestaurantException {
-
 			Restaurant restaurant = restaurantService.findRestaurantById(id);
 			return ResponseEntity.ok(restaurant);
 
@@ -61,10 +55,6 @@ public class RestaurantController {
 			Users users = userService.findUserProfileByJwt(jwt);
 			RestaurantDto restaurant = restaurantService.addToFavorites(id, users);
 			return ResponseEntity.ok(restaurant);
-
 	}
 	
-	
-
-
 }

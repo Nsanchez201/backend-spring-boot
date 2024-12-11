@@ -10,9 +10,7 @@ import com.zosh.model.IngredientCategory;
 
 public interface IngredientsCategoryRepository 
 extends JpaRepository<IngredientCategory, Long>{
-	
-	
-//	List<IngredientCategory> findByFoodId(Long menuItemId);
+
 	List<IngredientCategory> findByRestaurantId(Long id);
 
 	@Query("SELECT e FROM IngredientCategory e "

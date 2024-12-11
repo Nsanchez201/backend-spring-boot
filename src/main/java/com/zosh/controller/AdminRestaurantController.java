@@ -42,11 +42,10 @@ public class AdminRestaurantController {
 			return ResponseEntity.ok(restaurant);
 	}
 
-
 	@PutMapping("/{id}")
 	public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id, @RequestBody CreateRestaurantRequest req,
 			@RequestHeader("Authorization") String jwt) throws RestaurantException, UserException {
-		Users users = userService.findUserProfileByJwt(jwt);
+			Users users = userService.findUserProfileByJwt(jwt);
 		
 			Restaurant restaurant = restaurantService.updateRestaurant(id, req);
 			return ResponseEntity.ok(restaurant);
@@ -56,7 +55,7 @@ public class AdminRestaurantController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse> deleteRestaurantById(@PathVariable("id") Long restaurantId,
 			@RequestHeader("Authorization") String jwt) throws RestaurantException, UserException {
-		Users users = userService.findUserProfileByJwt(jwt);
+			Users users = userService.findUserProfileByJwt(jwt);
 		
 			restaurantService.deleteRestaurant(restaurantId);
 			
@@ -64,7 +63,6 @@ public class AdminRestaurantController {
 			return ResponseEntity.ok(res);
 	}
 
-	
 	@PutMapping("/{id}/status")
 	public ResponseEntity<Restaurant> updateStataurantStatus(
 			@RequestHeader("Authorization") String jwt,
@@ -72,7 +70,6 @@ public class AdminRestaurantController {
 		
 			Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
 			return ResponseEntity.ok(restaurant);
-
 	}
 
 	@GetMapping("/user")
@@ -81,9 +78,6 @@ public class AdminRestaurantController {
 		Users users = userService.findUserProfileByJwt(jwt);
 		Restaurant restaurant = restaurantService.getRestaurantsByUserId(users.getId());
 		return ResponseEntity.ok(restaurant);
-
 	}
-	
-	
 
 }

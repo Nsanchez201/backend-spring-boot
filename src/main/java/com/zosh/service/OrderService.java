@@ -24,5 +24,4 @@ public interface OrderService {
 	 
 	 public List<Order> getOrdersOfRestaurant(Long restaurantId,String orderStatus) throws OrderException, RestaurantException;
 	 
-
 }

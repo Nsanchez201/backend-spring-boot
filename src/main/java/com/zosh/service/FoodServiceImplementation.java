@@ -26,13 +26,6 @@ public class FoodServiceImplementation implements FoodService {
 	@Autowired
 	private foodRepository foodRepository;
 	
-
-	
-//	@Autowired
-//	private RestaurantRepository restaurantRepository;
-
-
-	
 	@Autowired
 	private IngredientsService ingredientService;
 	
@@ -56,21 +49,18 @@ public class FoodServiceImplementation implements FoodService {
 			food.setSeasonal(req.isSeasonal());		
 			food.setVegetarian(req.isVegetarian());
 			food.setIngredients(req.getIngredients());
-		food.setRestaurant(restaurant);
+			food.setRestaurant(restaurant);
 			food = foodRepository.save(food);
 
 			restaurant.getFoods().add(food);
 			return food;
-		
 	}
 
 	@Override
 	public void deleteFood(Long foodId) throws FoodException {
 		Food food=findFoodById(foodId);
-		food.setRestaurant(null);;
-//		foodRepository.save(food);
+		food.setRestaurant(null);
 		foodRepository.delete(food);
-
 	}
 
 
@@ -82,16 +72,13 @@ public class FoodServiceImplementation implements FoodService {
 			boolean isSeasonal,
 			String foodCategory) throws FoodException {
 		List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
-		
-		
-		
+
 	    if (isVegetarian) {
 	        foods = filterByVegetarian(foods, isVegetarian);
 	    }
 	    if (isNonveg) {
 	        foods = filterByNonveg(foods, isNonveg);
 	    }
-
 	    if (isSeasonal) {
 	        foods = filterBySeasonal(foods, isSeasonal);
 	    }
@@ -100,7 +87,6 @@ public class FoodServiceImplementation implements FoodService {
 	    }
 		
 		return foods;
-		
 	}
 	
 	private List<Food> filterByVegetarian(List<Food> foods, boolean isVegetarian) {
@@ -108,18 +94,20 @@ public class FoodServiceImplementation implements FoodService {
 	            .filter(food -> food.isVegetarian() == isVegetarian)
 	            .collect(Collectors.toList());
 	}
+
 	private List<Food> filterByNonveg(List<Food> foods, boolean isNonveg) {
 	    return foods.stream()
 	            .filter(food -> food.isVegetarian() == false)
 	            .collect(Collectors.toList());
 	}
+
 	private List<Food> filterBySeasonal(List<Food> foods, boolean isSeasonal) {
 	    return foods.stream()
 	            .filter(food -> food.isSeasonal() == isSeasonal)
 	            .collect(Collectors.toList());
 	}
+
 	private List<Food> filterByFoodCategory(List<Food> foods, String foodCategory) {
-	    
 		return foods.stream()
 			    .filter(food -> {
 			        if (food.getFoodCategory() != null) {

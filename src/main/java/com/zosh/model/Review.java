@@ -35,6 +35,5 @@ public class Review {
 
     private LocalDateTime createdAt;
     
-   
 }
 

@@ -23,9 +23,7 @@ public class IngredientsServiceImplementation implements IngredientsService {
 	
 	@Autowired
 	private IngredientsItemRepository ingredientsItemRepository;
-	
-	
-	
+
 	@Autowired
 	private RestaurantService restaurantService;
 	
@@ -70,7 +68,6 @@ public class IngredientsServiceImplementation implements IngredientsService {
 
 		return ingredientsItemRepository.findByRestaurantId(restaurantId);
 	}
-	
 
 	@Override
 	public IngredientsItem createIngredientsItem(Long restaurantId, 
@@ -109,9 +106,5 @@ public class IngredientsServiceImplementation implements IngredientsService {
 		ingredient.setInStoke(!ingredient.isInStoke());
 		return ingredientsItemRepository.save(ingredient);
 	}
-
-	
-
-	
 
 }

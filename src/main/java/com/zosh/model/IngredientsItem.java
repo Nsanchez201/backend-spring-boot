@@ -37,6 +37,4 @@ public class IngredientsItem {
 	
 	private boolean inStoke=true;
 	
-	
-
 }

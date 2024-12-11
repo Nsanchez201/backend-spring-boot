@@ -30,19 +30,16 @@ public class NotificationServiceImplementation implements NotificationService {
 
 	@Override
 	public void sendRestaurantNotification(Restaurant restaurant, String message) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void sendPromotionalNotification(Users users, String message) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public List<Notification> findUsersNotification(Long userId) {
-		// TODO Auto-generated method stub
 		return notificationRepository.findByCustomerId(userId);
 	}
 

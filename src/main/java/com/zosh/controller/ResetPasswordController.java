@@ -14,7 +14,6 @@ import com.zosh.response.ApiResponse;
 import com.zosh.service.PasswordResetTokenService;
 import com.zosh.service.UserService;
 
-
 public class ResetPasswordController {
 
     @Autowired
@@ -25,7 +24,6 @@ public class ResetPasswordController {
 
     @PostMapping
     public ResponseEntity<ApiResponse> resetPassword(
-    		
     		@RequestBody ResetPasswordRequest req) throws UserException {
         
         PasswordResetToken resetToken = passwordResetTokenService.findByToken(req.getToken());
@@ -36,7 +34,6 @@ public class ResetPasswordController {
         if(resetToken.isExpired()) {
         	passwordResetTokenService.delete(resetToken);
         	throw new UserException("token get expired...");
-        
         }
 
         // Update users's password

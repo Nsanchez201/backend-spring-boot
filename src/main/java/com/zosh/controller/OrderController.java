@@ -46,13 +46,10 @@ public class OrderController {
 			return ResponseEntity.ok(res);
 			
     	}else throw new OrderException("Please provide valid request body");
-		
     }
     
- 
-    
     @GetMapping("/order/user")
-    public ResponseEntity<List<Order>> getAllUserOrders(	@RequestHeader("Authorization") String jwt) throws OrderException, UserException{
+    public ResponseEntity<List<Order>> getAllUserOrders(@RequestHeader("Authorization") String jwt) throws OrderException, UserException{
     
     	Users users =userService.findUserProfileByJwt(jwt);
     	
@@ -64,8 +61,4 @@ public class OrderController {
     	}
     }
     
-
-    
-
-	
 }

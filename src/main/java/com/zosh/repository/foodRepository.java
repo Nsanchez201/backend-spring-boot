@@ -12,7 +12,6 @@ import com.zosh.model.Food;
 
 public interface foodRepository extends JpaRepository<Food, Long> {
 
-	
 	List<Food> findByRestaurantId(Long restaurantId);
 	
 	@Query("SELECT f FROM Food f WHERE "
@@ -21,8 +20,5 @@ public interface foodRepository extends JpaRepository<Food, Long> {
 			+ "f.restaurant!=null"
 	)
 	List<Food> searchByNameOrCategory(@Param("keyword") String keyword);
-
-
-	
 
 }

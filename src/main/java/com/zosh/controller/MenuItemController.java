@@ -24,13 +24,13 @@ public class MenuItemController {
 	@Autowired
 	private UserService userService;
 
-
 	@GetMapping("/search")
 	public ResponseEntity<List<Food>> searchFood(
 			@RequestParam String name)  {
 		List<Food> menuItem = menuItemService.searchFood(name);
 		return ResponseEntity.ok(menuItem);
 	}
+	
 	@GetMapping("/restaurant/{restaurantId}")
 	public ResponseEntity<List<Food>> getMenuItemByRestaurantId(
 			@PathVariable Long restaurantId,
@@ -42,7 +42,5 @@ public class MenuItemController {
 				restaurantId,vegetarian,nonveg,seasonal,food_category);
 		return ResponseEntity.ok(menuItems);
 	}
-	
-
 
 }

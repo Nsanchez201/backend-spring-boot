@@ -33,6 +33,5 @@ public class Notification {
     
     private boolean readStatus;
     
-    
 }
 

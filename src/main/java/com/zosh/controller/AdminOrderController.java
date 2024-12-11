@@ -29,13 +29,12 @@ public class AdminOrderController {
 	@Autowired
 	private UserService userService;
 	
-	
     @DeleteMapping("/order/{orderId}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long orderId) throws OrderException{
-    	if(orderId!=null) {
-    		orderService.cancelOrder(orderId);
-    	return ResponseEntity.ok("Order deleted with id)"+orderId);
-    }else return new ResponseEntity<String>(HttpStatus.BAD_REQUEST) ;
+			if(orderId!=null) {
+				orderService.cancelOrder(orderId);
+			return ResponseEntity.ok("Order deleted with id)"+orderId);
+			}else return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
     }
     
     
@@ -43,20 +42,13 @@ public class AdminOrderController {
     public ResponseEntity<List<Order>> getAllRestaurantOrders(
     		@PathVariable Long restaurantId,
     		@RequestParam(required = false) String order_status) throws OrderException, RestaurantException{
-    	
-    		List<Order> orders = orderService.
-    				getOrdersOfRestaurant(restaurantId,order_status);
-    		
-//    		System.out.println("ORDER STATUS----- "+orderStatus);
+    		List<Order> orders = orderService.getOrdersOfRestaurant(restaurantId,order_status);
     		return ResponseEntity.ok(orders);
-    		
-    	
     	
     }
     
     @PutMapping("/orders/{orderId}/{orderStatus}")
     public ResponseEntity<Order> updateOrders(@PathVariable Long orderId,@PathVariable String orderStatus) throws OrderException, RestaurantException{
-    	
     		Order orders = orderService.updateOrder(orderId, orderStatus);
     		return ResponseEntity.ok(orders);
     		

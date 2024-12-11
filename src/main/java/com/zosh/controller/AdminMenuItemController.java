@@ -47,26 +47,19 @@ public class AdminMenuItemController {
 			throws FoodException, UserException, RestaurantException {
 		System.out.println("req-controller ----"+item);
 		Users users = userService.findUserProfileByJwt(jwt);
-//		Category category=categoryService.findCategoryById(item.getCategoryId());
 		Restaurant restaurant=restaurantService.findRestaurantById(item.getRestaurantId());
-			Food menuItem = menuItemService.createFood(item,item.getCategory(),restaurant);
-			return ResponseEntity.ok(menuItem);
+		Food menuItem = menuItemService.createFood(item,item.getCategory(),restaurant);
+		return ResponseEntity.ok(menuItem);
 
 	}
-
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteItem(@PathVariable Long id, @RequestHeader("Authorization") String jwt)
 			throws UserException, FoodException {
 		Users users = userService.findUserProfileByJwt(jwt);
-		
-			menuItemService.deleteFood(id);
-			return ResponseEntity.ok("Menu item deleted");
-		
-	
+		menuItemService.deleteFood(id);
+		return ResponseEntity.ok("Menu item deleted");
 	}
-
-	
 
 	@GetMapping("/search")
 	public ResponseEntity<List<Food>> getMenuItemByName(@RequestParam String name)  {

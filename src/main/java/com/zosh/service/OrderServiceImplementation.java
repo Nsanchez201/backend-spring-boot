@@ -34,12 +34,16 @@ public class OrderServiceImplementation implements OrderService {
 	
 	@Autowired
 	private AddressRepository addressRepository;
+
 	@Autowired
 	private CartSerive cartService;
+
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+
 	@Autowired
 	private OrderRepository orderRepository;
+
 	@Autowired
 	private RestaurantRepository restaurantRepository;
 	
@@ -52,22 +56,16 @@ public class OrderServiceImplementation implements OrderService {
 	@Autowired
 	private NotificationService notificationService;
 	
-
-	
-
 	@Override
 	public PaymentResponse createOrder(CreateOrderRequest order, Users users) throws UserException, RestaurantException, CartException, StripeException {
 		
 	    Address shippAddress = order.getDeliveryAddress();
-
-	    
 	    Address savedAddress = addressRepository.save(shippAddress);
 	    
 	    if(!users.getAddresses().contains(savedAddress)) {
 	    	users.getAddresses().add(savedAddress);
 	    }
 	    
-		
 		System.out.println("users addresses --------------  "+ users.getAddresses());
 		   
 		 userRepository.save(users);
@@ -86,7 +84,6 @@ public class OrderServiceImplementation implements OrderService {
 	    createdOrder.setRestaurant(restaurant.get());
 
         Cart cart = cartService.findCartByUserId(users.getId());
-        
 	    List<OrderItem> orderItems = new ArrayList<>();
 	    
 	    for (CartItem cartItem : cart.getItems()) {
@@ -108,12 +105,10 @@ public class OrderServiceImplementation implements OrderService {
 	    createdOrder.setItems(orderItems);
 	    Order savedOrder = orderRepository.save(createdOrder);
 
-	   restaurant.get().getOrders().add(savedOrder);
+	   	restaurant.get().getOrders().add(savedOrder);
 	   
-	   restaurantRepository.save(restaurant.get());
-	   
+	   	restaurantRepository.save(restaurant.get());
 
-	   
 	   PaymentResponse res=paymentSerive.generatePaymentLink(savedOrder);
 	   return res;
 
@@ -121,13 +116,12 @@ public class OrderServiceImplementation implements OrderService {
 
 	@Override
 	public void cancelOrder(Long orderId) throws OrderException {
-           Order order =findOrderById(orderId);
-           if(order==null) {
-        	   throw new OrderException("Order not found with the id "+orderId);
-           }
-		
-		    orderRepository.deleteById(orderId);
-		
+		Order order =findOrderById(orderId);
+		if(order==null) {
+			throw new OrderException("Order not found with the id "+orderId);
+		}
+	
+		orderRepository.deleteById(orderId);
 	}
 	
 	public Order findOrderById(Long orderId) throws OrderException {
@@ -156,13 +150,6 @@ public class OrderServiceImplementation implements OrderService {
 			
 			return orders;
 	}
-//    private List<MenuItem> filterByVegetarian(List<MenuItem> menuItems, boolean isVegetarian) {
-//    return menuItems.stream()
-//            .filter(menuItem -> menuItem.isVegetarian() == isVegetarian)
-//            .collect(Collectors.toList());
-//}
-	
-	
 
 	@Override
 	public Order updateOrder(Long orderId, String orderStatus) throws OrderException {
@@ -177,10 +164,6 @@ public class OrderServiceImplementation implements OrderService {
 			return orderRepository.save(order);
 		}
 		else throw new OrderException("Please Select A Valid Order Status");
-		
-		
 	}
-	
-	
 
 }

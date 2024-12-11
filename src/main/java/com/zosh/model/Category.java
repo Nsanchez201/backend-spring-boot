@@ -25,7 +25,5 @@ public class Category {
     @ManyToOne
     @JsonIgnore
     private Restaurant restaurant;
-    
- 
 }
 

@@ -61,7 +61,6 @@ public class CartServiceImplementation implements CartSerive {
 		cartRepository.save(cart);
 		
 		return savedItem;
-
 	}
 
 	@Override
@@ -97,6 +96,7 @@ public class CartServiceImplementation implements CartSerive {
 	public Long calculateCartTotals(Cart cart) throws UserException {
 
 		Long total = 0L;
+
 		for (CartItem cartItem : cart.getItems()) {
 			total += cartItem.getFood().getPrice() * cartItem.getQuantity();
 		}
@@ -105,7 +105,9 @@ public class CartServiceImplementation implements CartSerive {
 
 	@Override
 	public Cart findCartById(Long id) throws CartException {
+
 		Optional<Cart> cart = cartRepository.findById(id);
+
 		if(cart.isPresent()) {
 			return cart.get();
 		}
@@ -131,7 +133,5 @@ public class CartServiceImplementation implements CartSerive {
 		cart.getItems().clear();
 		return cartRepository.save(cart);
 	}
-
-	
 
 }

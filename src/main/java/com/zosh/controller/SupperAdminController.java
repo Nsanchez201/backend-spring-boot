@@ -23,13 +23,11 @@ public class SupperAdminController {
 		List<Users> users =userService.findAllUsers();
 		
 		return new ResponseEntity<>(users,HttpStatus.ACCEPTED);
-
 	}
 	
 	@GetMapping("/api/pending-customers")
 	public ResponseEntity<List<Users>> getPenddingRestaurantUser(){
 		List<Users> users=userService.getPenddingRestaurantOwner();
 		return new ResponseEntity<List<Users>>(users,HttpStatus.ACCEPTED);
-		
 	}
 }

@@ -37,7 +37,6 @@ public class CartController {
 			@RequestHeader("Authorization") String jwt) throws UserException, FoodException, CartException, CartItemException {
 		CartItem cart = cartService.addItemToCart(req, jwt);
 		return ResponseEntity.ok(cart);
-
 	}
 
 	@PutMapping("/cart-item/update")
@@ -51,19 +50,14 @@ public class CartController {
 	@DeleteMapping("/cart-item/{id}/remove")
 	public ResponseEntity<Cart> removeItemFromCart(@PathVariable Long id,
 			@RequestHeader("Authorization") String jwt) throws UserException, CartException, CartItemException {
-
 		Cart cart = cartService.removeItemFromCart(id, jwt);
 		return ResponseEntity.ok(cart);
-
 	}
 
 	@GetMapping("/cart/total")
 	public ResponseEntity<Double> calculateCartTotals(@RequestParam Long cartId,
 			@RequestHeader("Authorization") String jwt) throws UserException, CartException {
-
-		
 		Users users = userService.findUserProfileByJwt(jwt);
-		
 		Cart cart =cartService.findCartByUserId(users.getId());
 		double total = cartService.calculateCartTotals(cart);
 		return ResponseEntity.ok(total);
@@ -72,7 +66,7 @@ public class CartController {
 	@GetMapping("/cart/")
 	public ResponseEntity<Cart> findUserCart(
 			@RequestHeader("Authorization") String jwt) throws UserException, CartException {
-Users users =userService.findUserProfileByJwt(jwt);
+		Users users =userService.findUserProfileByJwt(jwt);
 		Cart cart = cartService.findCartByUserId(users.getId());
 		return ResponseEntity.ok(cart);
 	}
@@ -80,7 +74,7 @@ Users users =userService.findUserProfileByJwt(jwt);
 	@PutMapping("/cart/clear")
 	public ResponseEntity<Cart> cleareCart(
 			@RequestHeader("Authorization") String jwt) throws UserException, CartException {
-Users users =userService.findUserProfileByJwt(jwt);
+		Users users =userService.findUserProfileByJwt(jwt);
 		Cart cart = cartService.clearCart(users.getId());
 		return ResponseEntity.ok(cart);
 	}

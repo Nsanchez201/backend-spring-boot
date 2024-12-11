@@ -37,20 +37,18 @@ public class ReviewController {
 		return ResponseEntity.ok(submitedReview);
 	}
 
-	  
-
-	    @DeleteMapping("/delete/{reviewId}")
-	    public ResponseEntity<String> deleteReview(@PathVariable Long reviewId) throws ReviewException {
-	        reviewService.deleteReview(reviewId);
-	        return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
-	    }
-
-	    @GetMapping("/average-rating")
-	    public ResponseEntity<Double> calculateAverageRating(@RequestBody List<Review> reviews) {
-	        double averageRating = reviewService.calculateAverageRating(reviews);
-	        return new ResponseEntity<>(averageRating, HttpStatus.OK);
-	    }
+	@DeleteMapping("/delete/{reviewId}")
+	public ResponseEntity<String> deleteReview(@PathVariable Long reviewId) throws ReviewException {
+		reviewService.deleteReview(reviewId);
+		return new ResponseEntity<>("Review deleted successfully", HttpStatus.OK);
 	}
+
+	@GetMapping("/average-rating")
+	public ResponseEntity<Double> calculateAverageRating(@RequestBody List<Review> reviews) {
+		double averageRating = reviewService.calculateAverageRating(reviews);
+		return new ResponseEntity<>(averageRating, HttpStatus.OK);
+	}
+}
 
 
 

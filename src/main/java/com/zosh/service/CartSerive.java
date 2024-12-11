@@ -23,8 +23,5 @@ public interface CartSerive {
 	public Cart findCartByUserId(Long userId) throws CartException, UserException;
 	
 	public Cart clearCart(Long userId) throws CartException, UserException;
-	
-
-	
 
 }

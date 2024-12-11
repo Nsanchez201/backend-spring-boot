@@ -28,7 +28,6 @@ public class RestaurantServiceImplementation implements RestaurantService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
 
 	@Override
 	public Restaurant createRestaurant(CreateRestaurantRequest req, Users users) {
@@ -102,8 +101,6 @@ public class RestaurantServiceImplementation implements RestaurantService {
 		Restaurant restaurants=restaurantRepository.findByOwnerId(userId);
 		return restaurants;
 	}
-
-
 
 	@Override
 	public List<Restaurant> searchRestaurant(String keyword) {

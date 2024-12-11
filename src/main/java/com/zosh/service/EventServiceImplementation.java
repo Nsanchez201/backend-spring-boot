@@ -39,13 +39,11 @@ public class EventServiceImplementation implements EventsService {
 
 	@Override
 	public List<Events> findAllEvent() {
-		// TODO Auto-generated method stub
 		return eventRepository.findAll();
 	}
 
 	@Override
 	public List<Events> findRestaurantsEvent(Long id) {
-		// TODO Auto-generated method stub
 		return eventRepository.findEventsByRestaurantId(id);
 	}
 
@@ -53,7 +51,6 @@ public class EventServiceImplementation implements EventsService {
 	public void deleteEvent(Long id) throws Exception {
 		Events event=findById(id);
 		eventRepository.delete(event);
-		
 	}
 
 	@Override

@@ -98,12 +98,10 @@ public class AuthController {
 		Cart cart = new Cart();
 		cart.setCustomer(savedUsers);
 		Cart savedCart = cartRepository.save(cart);
-//		savedUsers.setCart(savedCart);
 
 		List<GrantedAuthority> authorities=new ArrayList<>();
 
 		authorities.add(new SimpleGrantedAuthority(role.toString()));
-
 
 		Authentication authentication = new UsernamePasswordAuthenticationToken(email, password,authorities);
 		SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -137,9 +135,7 @@ public class AuthController {
 		authResponse.setJwt(token);
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 
-
 		String roleName = authorities.isEmpty() ? null : authorities.iterator().next().getAuthority();
-
 
 		authResponse.setRole(USER_ROLE.valueOf(roleName));
 

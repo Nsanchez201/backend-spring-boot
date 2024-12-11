@@ -21,7 +21,6 @@ import com.zosh.repository.UserRepository;
 @Service
 public class UserServiceImplementation implements UserService {
 
-
 	private UserRepository userRepository;
 	private JwtProvider jwtProvider;
 	private PasswordEncoder passwordEncoder;
@@ -40,32 +39,27 @@ public class UserServiceImplementation implements UserService {
 		this.passwordEncoder=passwordEncoder;
 		this.passwordResetTokenRepository=passwordResetTokenRepository;
 		this.javaMailSender=javaMailSender;
-		
 	}
 
 	@Override
 	public Users findUserProfileByJwt(String jwt) throws UserException {
 		String email=jwtProvider.getEmailFromJwtToken(jwt);
 		
-		
 		Users users = userRepository.findByEmail(email);
 		
 		if(users ==null) {
 			throw new UserException("users not exist with email "+email);
 		}
-//		System.out.println("email users "+users.get().getEmail());
 		return users;
 	}
 
 	@Override
 	public List<Users> findAllUsers() {
-		// TODO Auto-generated method stub
 		return userRepository.findAll();
 	}
 
 	@Override
 	public List<Users> getPenddingRestaurantOwner() {
-		
 		return userRepository.getPenddingRestaurantOwners();
 	}
 	
@@ -91,6 +85,7 @@ public class UserServiceImplementation implements UserService {
         // Send an email containing the reset link
         sendEmail(users.getEmail(), "Password Reset", "Click the following link to reset your password: http://localhost:3000/account/reset-password?token=" + resetToken);
 	}
+
 	private void sendEmail(String to, String subject, String message) {
 	    SimpleMailMessage mailMessage = new SimpleMailMessage();
 
@@ -100,9 +95,11 @@ public class UserServiceImplementation implements UserService {
 
 	    javaMailSender.send(mailMessage);
 	}
+
 	private String generateRandomToken() {
 	    return UUID.randomUUID().toString();
 	}
+
 	private Date calculateExpiryDate() {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -116,13 +113,10 @@ public class UserServiceImplementation implements UserService {
 		Users users =userRepository.findByEmail(username);
 		
 		if(users !=null) {
-			
 			return users;
 		}
 		
 		throw new UserException("users not exist with username "+username);
 	}
-
-
 
 }

@@ -8,5 +8,4 @@ public class ResetPasswordRequest {
 	private String password;
 	private String token;
 
-
 }

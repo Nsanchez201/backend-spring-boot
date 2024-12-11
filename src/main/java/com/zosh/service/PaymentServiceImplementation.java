@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Service
 public class PaymentServiceImplementation implements PaymentService{
 	
-	
 	@Value("${stripe.api.key}")
 	 private String stripeSecretKey;
 
@@ -53,7 +52,5 @@ public class PaymentServiceImplementation implements PaymentService{
 	        res.setPayment_url(session.getUrl());
 	        
 	        return res;
-	    
 	}
-
 }

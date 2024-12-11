@@ -36,6 +36,5 @@ public class CartItem {
     
     private Long totalPrice;
     
-   
 }
 

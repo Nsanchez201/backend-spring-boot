@@ -29,6 +29,5 @@ public class Coupon {
 
     private String termsAndConditions;
     
-   
 }
 
